@@ -4,13 +4,15 @@ require_once(WEBROOT.'/commons/class/Autoload.class.php');
 
 class App {
   
+  public $autoload;
+  
   public function __construct(){
     $this->autoload();
     $this->generateHeader();
   }
   
   public function autoload(){
-    $autoload = new Autoload();
+    $this->autoload = new Autoload();
   }
   
   public function generateHeader(){

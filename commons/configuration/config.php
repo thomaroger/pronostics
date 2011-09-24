@@ -6,4 +6,8 @@ define ('WEBROOT', '/Library/WebServer/Documents/WorkSpace_Web/pronostics');
 define ('COMMONS_HEADER', '../commons/templates/header.php');
 define ('COMMONS_FOOTER', '../commons/templates/footer.php');
 
+// Configuration de l'action par defaut
+define ('APP_DEFAULT', 'frontend');
+define ('ACTION_DEFAULT', 'login');
+
 ?>

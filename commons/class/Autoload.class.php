@@ -14,7 +14,13 @@ class Autoload{
   public function autoloadClassUtils(){
   }
   
-  public function autoloadAnotherFile(){
+  public function autoloadAction($app, $name){
+    $this->autoloadAnotherFile(WEBROOT.'/apps/'.$app.'/controllers/'.$name.'.controller.php');
+    $this->autoloadAnotherFile(WEBROOT.'/apps/'.$app.'/templates/'.$name.'.template.php');
+  }
+  
+  public function autoloadAnotherFile($path){
+    require_once($path);
   }
   
   public function requireAllFileInDirectory($directory){
