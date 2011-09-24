@@ -1,4 +1,5 @@
 <div id="login">
+  <h2>Ecran de connexion backend</h2>
   <form action="" name="connexion" method="post">
     <div class="ligne">
       <label for="email"> Email : </label>
