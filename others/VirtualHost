@@ -1,0 +1,14 @@
+#########################################################
+## pronostics
+#########################################################
+
+<VirtualHost *:80> 
+DocumentRoot /Library/WebServer/Documents/WorkSpace_Web/pronostics/web
+ServerName pronostics
+<Directory /Library/WebServer/Documents/WorkSpace_Web/pronostics/>
+        Options Indexes FollowSymLinks
+        AllowOverride all
+        Order allow,deny
+        Allow from all
+</Directory>
+</VirtualHost>
