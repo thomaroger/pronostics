@@ -15,8 +15,12 @@ class Autoload{
   }
   
   public function autoloadAction($app, $name){
-    $this->autoloadAnotherFile(WEBROOT.'/apps/'.$app.'/controllers/'.$name.'.controller.php');
-    $this->autoloadAnotherFile(WEBROOT.'/apps/'.$app.'/templates/'.$name.'.template.php');
+    $controller = WEBROOT.'/apps/'.$app.'/controllers/'.$name.'.controller.php';
+    $template = WEBROOT.'/apps/'.$app.'/templates/'.$name.'.template.php';
+    if(file_exists($controller) && file_exists($template)) {
+      $this->autoloadAnotherFile($controller);
+      $this->autoloadAnotherFile($template);
+    }
   }
   
   public function autoloadAnotherFile($path){
