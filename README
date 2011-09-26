@@ -3,7 +3,7 @@ Pronostics
 Site de pronostics en ligne
 
 
-Technologies Utilisées : 
+Technologies Utilisees : 
 Unix
 Apache 
 MySQL
@@ -15,5 +15,5 @@ Mootools
 Virtualhost
 Voir le fichier others/VirtualHost
 
-Base de données 
+Base de donnees 
 Voir le fichier others/database.sql

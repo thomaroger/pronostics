@@ -12,11 +12,13 @@ class Autoload{
   }
   
   public function autoloadClassUtils(){
+  	$this->autoloadAnotherFile(WEBROOT.'/commons/class/Db.class.php');
+  	$this->autoloadAnotherFile(WEBROOT.'/commons/class/Request.class.php');
   }
   
-  public function autoloadAction($app, $name){
-    $controller = WEBROOT.'/apps/'.$app.'/controllers/'.$name.'.controller.php';
-    $template = WEBROOT.'/apps/'.$app.'/templates/'.$name.'.template.php';
+  public function autoloadAction($apps, $name){
+    $controller = WEBROOT.'/apps/'.$apps.'/controllers/'.$name.'.controller.php';
+    $template = WEBROOT.'/apps/'.$apps.'/templates/'.$name.'.template.php';
     if(file_exists($controller) && file_exists($template)) {
       $this->autoloadAnotherFile($controller);
       $this->autoloadAnotherFile($template);
@@ -24,7 +26,9 @@ class Autoload{
   }
   
   public function autoloadAnotherFile($path){
-    require_once($path);
+  	if(file_exists($path)) {
+    	require_once($path);
+  	}
   }
   
   public function requireAllFileInDirectory($directory){

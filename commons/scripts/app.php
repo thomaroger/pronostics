@@ -1,4 +1,8 @@
-<?
+<?php
 require_once(WEBROOT.'/commons/class/App.class.php');
-$app = new App();
+$app = App::getInstance();
+$app->db =  Db::getInstance();
+$app->request = Request::getInstance();
+
+
 ?>

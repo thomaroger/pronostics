@@ -5,6 +5,17 @@ require_once(WEBROOT.'/commons/class/Autoload.class.php');
 class App {
   
   public $autoload;
+  public $db;
+  public $request;
+  
+  private static $instance;
+	
+  public static function getInstance() {
+    if(is_null(self::$instance)) {
+	  self::$instance = new App();  
+    }
+    return self::$instance;
+   }
   
   public function __construct(){
     $this->autoload();
