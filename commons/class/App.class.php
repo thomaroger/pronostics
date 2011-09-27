@@ -7,6 +7,8 @@ class App {
   public $autoload;
   public $db;
   public $request;
+  public $error;
+  public $context;
   
   private static $instance;
 	
@@ -46,6 +48,14 @@ class App {
     }else {
       $this->autoload->autoloadAction(APP_DEFAULT, !empty($path[1])?$path[1]:ACTION_DEFAULT); 
     }
+  }
+  
+  public function getContext(){
+  	return $this->context;
+  }
+  
+  public function getError(){
+  	return $this->error;
   }
 }
 

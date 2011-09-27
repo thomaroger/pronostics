@@ -3,12 +3,19 @@
 Class Db {
 	
 	
-	const BIND_TYPE_NUM = "NUM";
-	const BIND_TYPE_STR = "CHAR";
+	const BIND_TYPE_NUM = 'NUM';
+	const BIND_TYPE_INT = 'INT';
+	const BIND_TYPE_STR = 'CHAR';
 	
 	
 	private static $instance;
-	public $con;
+	
+	
+	private $con;
+	private $server;
+	private $login;
+	private $passwd;
+	private $base;
 	
 	public function __construct(){
 		$this->server = SERVER;
@@ -21,9 +28,10 @@ Class Db {
  
      if(is_null(self::$instance)) {
        self::$instance = new Db();  
+       self::$instance->getDatabaseInstance();
      }
- 
-     return self::$instance->getDatabaseInstance();
+ 	
+     return self::$instance;
    }
 	
 	public function getDatabaseInstance(){
@@ -32,12 +40,20 @@ Class Db {
 		if (!mysql_select_db($this->base, $this->con)) {
 			return false;
 		}
-		return $this->con;
+		return true;
+	}
+	
+	function addArrayParamsQuery(&$tabParamsquery, $varName, $varValue, $dataType = '') {
+		$tabParamsquery[$varName] = array("NOM" => $varName,
+									      "VALEUR" => $varValue,
+										  "TYPE" => $dataType);
 	}
 	
 	public function query($query, $tableauParams){
+		$tabRetour = array();
+		
 		if (is_array($tableauParams)) {	
-			foreach ($tableauParam as $nom => $param) {
+			foreach ($tableauParams as $nom => $param) {
 				$valeurParam = $param["VALEUR"];
 				$nomParam = $param["NOM"];
 				$typeParam = $param["TYPE"];
@@ -52,11 +68,17 @@ Class Db {
 				}
 			}
 		}
-		$result = mysql_query($query, $this->con);	
+		$result = mysql_query($query, $this->con) or die(mysql_error($this->con));;	
+		
+		if(mysql_num_rows($result) == 0){
+			return array();
+		}
+		
 		if($result === true){
 			$tabRetour = 1;
 		}else if($result){
-			while ($row = mysql_fetch_array($this->_parsedQuery, $this->fetchmode)) {
+			while ($row = mysql_fetch_assoc($result)) {
+			
 				$tabRetour[] = $row;
 			}
 		}else{
