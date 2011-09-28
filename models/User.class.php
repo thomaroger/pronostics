@@ -68,6 +68,7 @@ class User extends UserMap{
   }
   
   public function setSession(){
+  	unset($this->app);
   	$_SESSION[self::$namespace] = serialize($this);
   }
   
@@ -76,7 +77,6 @@ class User extends UserMap{
   		return false;
   	}
     $user = unserialize($_SESSION[self::$namespace]);
-    unset($user->app);
     return $user;
   }
 }

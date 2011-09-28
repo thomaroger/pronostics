@@ -17,6 +17,8 @@ class loginController{
   			$this->app->context->isConnected  = $isConnected;
   			if(!$isConnected){
   				$this->app->error->setError(0,"Identifiants incorrects",Error::LOG_ERROR);
+  			}else{
+  				$this->app->redirect("frontend","list");
   			}
 		}
 	}

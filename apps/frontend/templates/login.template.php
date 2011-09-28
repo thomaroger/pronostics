@@ -7,8 +7,6 @@
 	if(!($ctx->isConnected)){
 		echo $err->getLevel()." ".$err->getMessage();
 	}
-	$user = User::getUser();
-	var_dump($user);
 ?>
 
 <div id="login">

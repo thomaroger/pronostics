@@ -57,6 +57,10 @@ class App {
   public function getError(){
   	return $this->error;
   }
+  
+  public function redirect($apps, $name){
+  	header('Location: /'.$apps.'/'.$name);   
+  }
 }
 
 ?>

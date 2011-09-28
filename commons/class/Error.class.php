@@ -5,9 +5,9 @@ class Error{
 	const LOG_WARNING = 2;
 	const LOG_NOTICE = 3;
 	
-	public static $logs = array(self::LOG_ERROR => 'erreur',
-								self::LOG_WARNING => 'avertissement',
-								self::LOG_NOTICE => 'notice');
+	public static $logs = array(self::LOG_ERROR => 'Erreur',
+								self::LOG_WARNING => 'Avertissement',
+								self::LOG_NOTICE => 'Notice');
 	
 	private static $instance;
 	public $code;
