@@ -1,7 +1,3 @@
-#########################################################
-## pronostics
-#########################################################
-
 <VirtualHost *:80> 
 DocumentRoot /Library/WebServer/Documents/WorkSpace_Web/pronostics/web
 ServerName pronostics
@@ -11,4 +7,7 @@ ServerName pronostics
         Order allow,deny
         Allow from all
 </Directory>
+RewriteEngine On
+RewriteRule ^.*$ /index.php [L,QSA]  
 </VirtualHost>
+
