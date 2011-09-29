@@ -8,7 +8,8 @@ class listController{
 	}
 	
 	public function action(){
-		
+    $userCourant = User::getUser();
+  	var_dump($userCourant);		
 	}
 }
 ?>
