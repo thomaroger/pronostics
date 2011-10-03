@@ -32,7 +32,6 @@ class ChampionshipMap{
 				  AND gt.GameType_Id = c.GameType_Id
 				  AND cu.User_Id = :user_id";
 		$this->app->db->addArrayParamsQuery($tabParams, 'user_id', $user->getUserId(), Db::BIND_TYPE_INT);
-		echo $query;
 		$result = $this->app->db->query($query,$tabParams);
 		return $result;
 	}
