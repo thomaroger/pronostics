@@ -8,8 +8,10 @@ class listController{
 	}
 	
 	public function action(){
-    $userCourant = User::getUser();
-  	var_dump($userCourant);		
+    	$userCourant = User::getUser();
+		$instChampionship = new Championship();
+		$championnships = $instChampionship->getChampionshipsByUser($userCourant);
+		var_dump($championnships);
 	}
 }
 ?>

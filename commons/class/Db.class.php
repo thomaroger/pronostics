@@ -58,7 +58,7 @@ Class Db {
 				$nomParam = $param["NOM"];
 				$typeParam = $param["TYPE"];
 				if ($typeParam == self::BIND_TYPE_NUM || $typeParam == Db::BIND_TYPE_INT) {
-					$query = str_replace(':' . $nomParam, $valeurParam, $this->_lastQuery);
+					$query = str_replace(':' . $nomParam, $valeurParam, $query);
 				} elseif ($typeParam == self::BIND_TYPE_STR || $typeParam == Db::BIND_TYPE_STR) {
 					$query = str_replace(':' . $nomParam, $this->quoteSql($valeurParam), $query);
 				} elseif (is_numeric($valeurParam) || strtoupper($valeurParam) == "NULL") {
@@ -68,7 +68,12 @@ Class Db {
 				}
 			}
 		}
-		$result = mysql_query($query, $this->con) or die(mysql_error($this->con));;	
+		$result = mysql_query($query, $this->con);	
+		
+		if(!$result){
+			echo(mysql_error($this->con));
+			return array();
+		}
 		
 		if(mysql_num_rows($result) == 0){
 			return array();
