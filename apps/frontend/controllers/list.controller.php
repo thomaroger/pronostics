@@ -10,8 +10,9 @@ class listController{
 	public function action(){
     	$userCourant = User::getUser();
 		$instChampionship = new Championship();
-		$championnships = $instChampionship->getChampionshipsByUser($userCourant);
-		var_dump($championnships);
+		$championships = $instChampionship->getChampionshipsByUser($userCourant);
+		$this->app->context->championships = $championships;
+		
 	}
 }
 ?>

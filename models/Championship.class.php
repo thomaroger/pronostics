@@ -22,6 +22,22 @@ class Championship extends ChampionshipMap {
 	public function setChampionshipDateBegin($date){
 		$this->championshipDateBegin = $date;
 	}
+	
+	public function getChampionshipId(){
+		return $this->championshipId;
+	}
+	
+	public function getChampionshipTypeGameId(){
+		return $this->championshipTypeGameId;
+	}
+	
+	public function getChampionshipName(){
+		return $this->championshipName;
+	}
+	
+	public function getChampionshipDateBegin(){
+		return $this->championshipDateBegin;
+	}
 
 	
 	public function setChampionship($championship){
@@ -45,6 +61,23 @@ class Championship extends ChampionshipMap {
 		return $results;
 	}
 	
+	public function getGameType(){
+		$instGameType = new GameType();
+		return $instGameType->getGameType($this);
+	}
+	
+	public function getDays(){
+		$results = array();
+		$resultsTab = $this->getDaysSQL();
+		foreach($resultsTab as $resultTab) {
+			$instDay = new Day();
+			unset($instDay->app);
+			$instDay->setDay($resultTab);
+			$results[] = $instDay; 
+		}
+		return $results;
+	}
+
 }
 
 ?>
