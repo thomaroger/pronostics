@@ -12,7 +12,7 @@
 			echo 'Pas de journée pour ce championnat';
 		}
 		foreach($days as $day){
-			echo $day->getName()." ".$day->getStatus()."<br /><br />";
+			echo "<a href='/frontend/games?day=".$day->getDayId()."'>".$day->getName()." ".$day->getStatus()."</a><br /><br />";
 		}
 		echo "<br />";
 	}

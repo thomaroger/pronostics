@@ -63,8 +63,27 @@ class Day extends DayMap{
   	$this->setPrognosisBegin($day['Day_Prognosis_Begin']);
   	$this->setPrognosisEnd($day['Day_Prognosis_End']);
   	$this->setStatus($day['Day_Status']);
-  	
+  }
+  
+ public function getDayById($dayId){
+  	$resultTab = $this->getDayByIdSQL($dayId);
+    $instDay = new self();
+	unset($instDay->app);
+	$instDay->setDay($resultTab[0]);
+	return $instDay;
   }
  
+  public function getGames(){
+  	$results = array();
+  	$resultsTab = $this->getGamesSQL($this);
+  	foreach($resultsTab as $resultTab){
+	    $instGame = new Game();
+		unset($instGame->app);
+		$instGame->setGame($resultTab);
+		$results[] = $instGame;
+  	}
+	return $results;
+  }
+  
 }
 ?>
