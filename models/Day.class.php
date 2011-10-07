@@ -1,12 +1,19 @@
 <?php 
 class Day extends DayMap{
   
+  const STATUT_LIVE = 0;
+  const STATUT_EXPIRED = 1;	
+  
+  public static $statuses = array(self::STATUT_LIVE => 'en cours',
+  								  self::STATUT_EXPIRED => 'expire');
+	
   private $dayId;
   private $championshipId;
   private $name;
   private $prognosisBegin;
   private $prognosisEnd;
   private $status;
+  
   
   public function setDayId($id){
   	$this->dayId = $id;
@@ -83,6 +90,19 @@ class Day extends DayMap{
 		$results[] = $instGame;
   	}
 	return $results;
+  }
+  
+  public function getGamesId(){
+  	$resultsTab = $this->getGamesSQL($this);
+  	$str = "";
+  	foreach($resultsTab as $resultTab){
+  		$str .=$resultTab['Game_Id'].",";
+  	}
+  	return trim($str, ',');
+  }
+  
+  public function isPrognosis($user){
+  	return $this->isPrognosisSQL($user);
   }
   
 }

@@ -9,7 +9,12 @@ class gamesController{
 	
 	public function action(){
 		$userCourant = User::getUser();
-		
+		$dayId = $this->app->request->getParameter('day');
+		$instDay = new Day();
+		$day = $instDay->getDayById($dayId); 
+		if($day->getStatus() == 1) {
+			$this->app->redirect("frontend","list");
+		}
 		$flag = $this->app->request->getParameter('pronosFlag');
 		if($flag){
 			$dayId = $this->app->request->getParameter('pronosDay');
@@ -26,26 +31,21 @@ class gamesController{
 				}else{
 					$prognosisWin = 'nul';
 				}
-				/*$instPrognosis = new Prognosis();
-				$instPrognosis->insert();*/
-				var_dump($prognosis);
-				var_dump($prognosisWin);
+				$prognosisTab = array('Game_Id' => $game->getGameId(),
+									  'User_Id' => $userCourant->getUserId(),
+									  'Prognosis_Team1' => $prognosis['team1'],
+									  'Prognosis_Team2' => $prognosis['team2'],
+									  'Prognosis_Win' => $prognosisWin);
+				$instPrognosis = new Prognosis();
+				
+				if ($instPrognosis->insert($prognosisTab)) {
+					$this->app->redirect("frontend","list");
+				}			
 			}
 		}
 		
-    	
-		$dayId = $this->app->request->getParameter('day');
-		$instDay = new Day();
-		$day = $instDay->getDayById($dayId); 
 		$this->app->context->day = $day;
 		$this->app->context->games = $day->getGames();
-	}
-	
-	public function savePrognosis(){
-		var_dump($this);
-		$userCourant = User::getUser();
-		var_dump($userCourant->getUserId());
-		
 	}
 }
 ?>

@@ -12,7 +12,11 @@
 			echo 'Pas de journée pour ce championnat';
 		}
 		foreach($days as $day){
-			echo "<a href='/frontend/games?day=".$day->getDayId()."'>".$day->getName()." ".$day->getStatus()."</a><br /><br />";
+			echo "<a href='/frontend/games?day=".$day->getDayId()."'>".$day->getName()." - ".Day::$statuses[$day->getStatus()]."</a>";
+			if($day->isPrognosis($ctx->user)){
+				echo "  - deja pronostiqué";	
+			}
+			echo "<br /><br />";
 		}
 		echo "<br />";
 	}

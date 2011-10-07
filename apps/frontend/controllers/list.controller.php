@@ -11,6 +11,7 @@ class listController{
     	$userCourant = User::getUser();
 		$instChampionship = new Championship();
 		$championships = $instChampionship->getChampionshipsByUser($userCourant);
+		$this->app->context->user = $userCourant;
 		$this->app->context->championships = $championships;
 		
 	}

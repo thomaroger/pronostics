@@ -69,10 +69,16 @@ Class Db {
 			}
 		}
 		$result = mysql_query($query, $this->con);	
-		
+	
 		if(!$result){
+			var_dump($query);
+			var_dump($tableauParams);
 			echo(mysql_error($this->con));
 			return array();
+		}
+		
+		if($result === true){
+			return true;
 		}
 		
 		if(mysql_num_rows($result) == 0){
