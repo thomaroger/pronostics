@@ -55,6 +55,19 @@ class DayMap{
 		$result = $this->app->db->query($query,$tabParams);
 		return ($result[0]['COUNT'] > 0);
 	}
+	
+	public function getPrognosisSQL($user){
+		$this->app = App::getInstance();
+		$tabParams = array();
+		$query = "SELECT *
+				  FROM ".$this->getTableNamePrognosis() ."
+				  WHERE Game_id IN (:game_id)
+				  AND User_id = :user_id";
+		$this->app->db->addArrayParamsQuery($tabParams, 'game_id', $this->getGamesId(), Db::BIND_TYPE_INT);
+		$this->app->db->addArrayParamsQuery($tabParams, 'user_id', $user->getUserId(), Db::BIND_TYPE_INT);
+		$result = $this->app->db->query($query,$tabParams);
+		return $result;
+	}
 }
 
 ?>

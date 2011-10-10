@@ -105,5 +105,17 @@ class Day extends DayMap{
   	return $this->isPrognosisSQL($user);
   }
   
+  public function getPrognosis($user){
+  	return $this->getPrognosisSQL($user);
+  }
+  
+  public function decorate($prognosis){
+  	$results = array();
+  	foreach($prognosis as $prognosi){
+  		$results[$prognosi['Game_Id']] = array('TEAM1' => $prognosi['Prognosis_Team1'],
+  						 						 'TEAM2'=> $prognosi['Prognosis_Team2']);
+  	}
+  	return $results;
+  }
 }
 ?>

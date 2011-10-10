@@ -43,9 +43,12 @@ class gamesController{
 				}			
 			}
 		}
-		
+		$this->app->context->prognosis = array();
 		$this->app->context->day = $day;
 		$this->app->context->games = $day->getGames();
+		if($day->isPrognosis($userCourant)){
+			$this->app->context->prognosis = $day->decorate($day->getPrognosis($userCourant));
+		}
 	}
 }
 ?>
