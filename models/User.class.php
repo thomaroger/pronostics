@@ -8,6 +8,7 @@ class User extends UserMap{
   private $password;
   private $name;
   private $lastname;
+  private $isAdmin;
   
   public function getUserId(){
     return $this->userId;
@@ -27,6 +28,10 @@ class User extends UserMap{
   
   public function getLastName(){
     return $this->lastName;
+  }
+  
+  public function getAdmin($admin){
+    return $this->isAdmin;
   }
   
  public function setUserId($userId){
@@ -49,6 +54,10 @@ class User extends UserMap{
    $this->lastName = $lastName;
   }
   
+  public function setAdmin($admin){
+   $this->isAdmin = $admin;
+  }
+  
   
   public function identify($email, $password){
   	$user = $this->identifySQL($email,md5($password));
@@ -65,6 +74,7 @@ class User extends UserMap{
   	$this->setEmail($user['User_Email']);
   	$this->setName($user['User_Name']);
   	$this->setLastName($user['User_Lastname']);
+  	$this->setAdmin($user['User_Admin']);
   }
   
   public function setSession(){
